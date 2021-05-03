@@ -1,5 +1,12 @@
+@baseApi =http://localhost:3030/
+@api = http://localhost:3030/api/notes
 
-POST http://localhost:3000/api/notes
+GET {{baseApi}}
+###
+GET {{api}}
+
+###
+POST  {{api}}
 Content-Type: application/json
 
 {
