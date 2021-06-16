@@ -1,5 +1,5 @@
-@baseApi =http://localhost:3030/
-@api = http://localhost:3030/api/notes
+@baseApi =http://localhost:8888
+@api = {{baseApi}}/api/notes
 
 GET {{baseApi}}
 ###
