@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 // const average = require("../utils/for_testing").average;
 
 const average = (array) => {

@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 const palindrome = (string) => {
   return string.split("").reverse().join("");
 };

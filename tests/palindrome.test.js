@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 const palindrome = require("../utils/for_testing").palindrome;
 
 test("palindrome of a", () => {
