@@ -1,6 +1,7 @@
 /* eslint-disable semi */
 const mongoose = require("mongoose");
 const supertest = require("supertest");
+const helper = require("./test_helper");
 const app = require("../app");
 
 const api = supertest(app);
@@ -19,9 +20,11 @@ const initialNotes = [
 ];
 beforeEach(async () => {
   await Note.deleteMany({});
-  let noteObject = new Note(initialNotes[0]);
+
+  let noteObject = new Note(helper.initialNotes[0]);
   await noteObject.save();
-  noteObject = new Note(initialNotes[1]);
+
+  noteObject = new Note(helper.initialNotes[1]);
   await noteObject.save();
 });
 
@@ -55,6 +58,26 @@ test("a specific note is within the returned notes", async () => {
 
   const contents = response.body.map((r) => r.content);
   expect(contents).toContain("Browser can execute only Javascript");
+});
+
+test("a valid note can be added", async () => {
+  const newNote = {
+    content: "async/await simplifies making async calls",
+    important: true,
+  };
+
+  await api
+    .post("/api/notes")
+    .send(newNote)
+    .expect(200)
+    .expect("Content-Type", /application\/json/);
+
+  const response = await api.get("/api/notes");
+
+  const contents = response.body.map((r) => r.content);
+
+  expect(response.body).toHaveLength(initialNotes.length + 1);
+  expect(contents).toContain("async/await simplifies making async calls");
 });
 
 afterAll(() => {
